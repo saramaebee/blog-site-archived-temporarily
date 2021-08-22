@@ -6,7 +6,7 @@ import {
     CssBaseline,
 
 } from '@material-ui/core';
-import PageTemplate from "./pages/PageTemplate";
+import BlogPage from "./pages/BlogPage";
 const index = () => {
 
     const [columns, setColumns] = useState();
@@ -37,10 +37,7 @@ const index = () => {
     );
     return (
         <ThemeProvider theme={theme}>
-            <PageTemplate>
-                <p>test</p>
-                <p>test2</p>
-            </PageTemplate>
+            <BlogPage />
             <CssBaseline />
         </ThemeProvider>
     );

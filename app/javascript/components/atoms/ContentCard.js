@@ -1,4 +1,5 @@
 import React from 'react';
+import marked from 'marked';
 import {
     Card,
     CardContent,
@@ -13,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 275,
     },
     title: {
-        fontSize: 14,
     },
     pos: {
         marginBottom: 12,
@@ -27,11 +27,29 @@ function ContentCard(props) {
     return(
         <Card className={classes.root}>
             <CardContent>
-                <Typography className={classes.title}>
-                    Card Title
+                <Typography variant='h3' className={classes.title}>
+                    {props.content.title}
                 </Typography>
                 <Typography>
-                    Words
+                    {() => {
+                        marked.setOptions({
+                            highlight: function (code, language) {
+                                const hljs = require('highlight.js');
+                                const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
+                                return hljs.highlight(validLanguage, code).value;
+                            },
+                            gfm: true,
+                            tables: true,
+                            breaks: false,
+                            pedantic: false,
+                            sanitize: true,
+                            smartLists: true,
+                            smartypants: false
+                        })
+                        return (
+                           <div>{marked(props.content.content.replace(/&gt;+/g, '>' || ''))}</div>
+                        );
+                    }}
                 </Typography>
             </CardContent>
         </Card>

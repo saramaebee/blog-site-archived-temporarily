@@ -29,11 +29,18 @@ function Content(props) {
             className={classes.root}
             spacing={10}
         >
-            {props.children.map((content, i) => (
+            { props.contentJson ? (
+                props.contentJson.map((el, i) => (
+                    <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
+                        <ContentCard content={el}/>
+                    </Grid>
+                ))
+            ) : null }
+            {props.children ? props.children.map((el, i) => (
                 <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
-                    <ContentCard content={content}/>
+                    <ContentCard content={el}/>
                 </Grid>)
-            )}
+            ) : null }
         </Grid>
     )
 }
