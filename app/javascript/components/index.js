@@ -1,15 +1,9 @@
-import React, {useState} from "react";
-import {
-    createTheme,
-    ThemeProvider,
-    Typography,
-    CssBaseline,
-
-} from '@material-ui/core';
+import React from "react";
+import {createTheme, CssBaseline, ThemeProvider,} from '@material-ui/core';
 import BlogPage from "./pages/BlogPage";
+
 const index = () => {
 
-    const [columns, setColumns] = useState();
     // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
     const theme = React.useMemo(

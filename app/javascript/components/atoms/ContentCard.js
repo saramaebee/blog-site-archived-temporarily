@@ -1,20 +1,13 @@
 import React from 'react';
 import marked from 'marked';
-import {
-    Card,
-    CardContent,
-    makeStyles,
-    useTheme,
-    Typography
-
-} from '@material-ui/core';
+import hljs from 'highlight.js';
+import {Card, CardContent, makeStyles, Typography, useTheme} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 275,
     },
-    title: {
-    },
+    title: {},
     pos: {
         marginBottom: 12,
     },
@@ -34,7 +27,6 @@ function ContentCard(props) {
                     {() => {
                         marked.setOptions({
                             highlight: function (code, language) {
-                                const hljs = require('highlight.js');
                                 const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
                                 return hljs.highlight(validLanguage, code).value;
                             },

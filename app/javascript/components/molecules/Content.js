@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    Grid,
-    makeStyles,
-    useTheme,
-
-} from '@material-ui/core';
+import {Grid, makeStyles, useTheme,} from '@material-ui/core';
 import ContentCard from '../atoms/ContentCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,18 +24,20 @@ function Content(props) {
             className={classes.root}
             spacing={10}
         >
-            { props.contentJson ? (
-                props.contentJson.map((el, i) => (
-                    <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
-                        <ContentCard content={el}/>
-                    </Grid>
-                ))
-            ) : null }
+            {async () => {
+                return (await props.dbPromise ? (
+                    props.dbPromise.map((el, i) => (
+                        <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
+                            <ContentCard content={el}/>
+                        </Grid>
+                    ))
+                ) : null)
+            }}
             {props.children ? props.children.map((el, i) => (
                 <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
                     <ContentCard content={el}/>
                 </Grid>)
-            ) : null }
+            ) : null}
         </Grid>
     )
 }
