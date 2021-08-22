@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class comment
 class BlogpostController < ApplicationController
   def index
     @blogposts = Blogpost.all
