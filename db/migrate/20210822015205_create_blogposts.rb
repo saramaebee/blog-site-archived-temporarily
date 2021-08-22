@@ -1,6 +1,6 @@
 class CreateBlogposts < ActiveRecord::Migration[6.1]
   def change
-    create_table :blogposts, primary_key: 'title', id: :title do |t|
+    create_table :blogposts, primary_key: 'title', id: false do |t|
       t.string :title
       t.string :content
       t.string :tags
