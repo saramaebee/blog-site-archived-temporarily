@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    useTheme,
-    Typography,
-    Toolbar,
-    AppBar as MUIAppBar,
-    makeStyles,
-    IconButton, Input,
-
-} from '@material-ui/core';
+import {AppBar as MUIAppBar, IconButton, makeStyles, Toolbar, Typography, useTheme,} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,31 +16,29 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 3,
-
+        marginTop: '1vh',
     }
 }));
 
 function AppBar(props) {
 
-    const { pColumns, pSetColumns } = props;
-
     // attributes
     const theme = useTheme();
     const classes = useStyles(theme);
 
-    // methods
-    const handleChange = (event) => {
-      pSetColumns(event.target.value);
-    };
+
+    const handleColumn = (e) => {
+        console.log('test');
+    }
 
     return (
         <MUIAppBar className={classes.appbar}>
             <Toolbar>
                 <IconButton className={classes.icon_button}>
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
                 <Typography variant='h1' className={classes.title}>{props.name}</Typography>
-                <Input style={{ width: '2vw'}} type='number' onChange={handleChange} value={pColumns} />
+                {/*<Input style={{ width: '3vw'}} type='number' onClick={handleColumn} value={props.columns} />*/}
             </Toolbar>
         </MUIAppBar>
     );

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 function Content(props) {
     const theme = useTheme();
     const classes = useStyles(theme);
-    const floored = Math.floor(12 / props.pColumns)
+    const floored = Math.min(Math.floor(12 / props.pColumns))
 
     return (
         <Grid
@@ -24,20 +24,19 @@ function Content(props) {
             className={classes.root}
             spacing={10}
         >
-            {async () => {
-                return (await props.dbPromise ? (
-                    props.dbPromise.map((el, i) => (
-                        <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
-                            <ContentCard content={el}/>
-                        </Grid>
-                    ))
-                ) : null)
-            }}
-            {props.children ? props.children.map((el, i) => (
-                <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
-                    <ContentCard content={el}/>
-                </Grid>)
-            ) : null}
+            {(props.dbContent ? (
+                props.dbContent.map((el, i) => (
+                    <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>
+                        <ContentCard content={el}/>
+                    </Grid>
+                ))
+            ) : null)}
+            {/*{props.children ? props.children.map((el, i) => (*/}
+            {/*    <Grid item xs={12} sm={12} md={floored} lg={floored} xl={floored} key={i}>*/}
+            {/*        <ContentCard content={el}/>*/}
+            {/*    </Grid>)*/}
+            {/*) : null}*/}
+            {/*{props.children}*/}
         </Grid>
     )
 }

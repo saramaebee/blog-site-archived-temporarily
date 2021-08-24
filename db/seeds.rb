@@ -6,5 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Blogpost.create(title: 'first-post', content: '#First Post\n\nHello, Rails!', tags: 'example')
+Blogpost.create(title: 'first-post', content: '# First Post\n\nHello, Rails!', tags: 'example')
 

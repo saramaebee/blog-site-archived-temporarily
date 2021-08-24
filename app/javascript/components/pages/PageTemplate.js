@@ -1,22 +1,54 @@
-import React, {useState} from "react";
+import React from "react";
 import AppBar from '../molecules/AppBar';
 import Content from '../molecules/Content';
 
-const PageTemplate = (props) => {
+class PageTemplate extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            columns: 2,
+            blogPosts: []
+        }
 
-    const [columns, setColumns] = useState(1);
-    const dbLength = props.dbPromise ? props.dbPromise.length : 0;
-    const childrenLength = props.children ? props.children.length : 0;
-    // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    let columnCount = Math.min(columns, childrenLength + dbLength, 6);
-    return (
-        <div>
-            <AppBar pColumns={columnCount} pSetColumns={setColumns} name='SARA TONIN SAYS'/>
-            <Content dbPromise={props.dbPromise ? props.dbPromise : null} pColumns={columnCount}>
-                {props.children ? props.children : null}
-            </Content>
-        </div>
-    );
+    }
+
+    componentDidMount() {
+        this.mounted = true;
+
+        if (this.mounted) {
+            fetch(this.props.fetchUrl).then(res => {
+                res.json().then(
+                    blogPosts => this.setState(state => ({columns: state.columns, blogPosts: blogPosts}))
+                ).catch(e => alert(e));
+            }).catch(e => alert(e));
+        }
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
+
+    handleColumnChange = (e) => {
+        console.log('Test');
+        // alert('beeep');
+
+        let columns = Math.min(e.target.value, this.state.blogPosts, 6);
+        this.setState(state => ({blogPosts: state.blogPosts, columns: columns}))
+    }
+
+    render() {
+        return (
+            <div>
+                <AppBar columns={this.state.columns} handleColumnChange={this.handleColumnChange.bind(this)}
+                        name='SARA TONIN SAYS'/>
+                <Content dbContent={this.state.blogPosts} pColumns={this.state.columns}>
+
+                </Content>
+            </div>
+        );
+    }
 }
+
 
 export default PageTemplate;

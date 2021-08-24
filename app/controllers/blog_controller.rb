@@ -1,4 +1,4 @@
 class BlogController < ApplicationController
-  def index
+  def landing
   end
 end
